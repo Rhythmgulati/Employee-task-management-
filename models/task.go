@@ -91,7 +91,7 @@ func UpdateTask(ourtask Task, id int) (bool, error) {
 	if err != nil {
 		return false, err
 	}
-	stmt, err := tx.Prepare("UPDATE tasks SET title = ? , description = ? , due_date = ? , status = ?  WHERE id = ?")
+	stmt, err := tx.Prepare("UPDATE tasks SET title = ?  description = ? due_date = ?  status = ?  WHERE id = ?")
 	if err != nil {
 		return false, err
 	}
