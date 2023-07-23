@@ -86,18 +86,18 @@ func AddTask(newtask Task) (bool, error) {
 	return true, nil
 }
 
-func UpdateTask(ourtask Task, id int) (bool, error) {
+func UpdateTask(ourTask Task, id int) (bool, error) {
 	tx, err := DB.Begin()
 	if err != nil {
 		return false, err
 	}
-	stmt, err := tx.Prepare("UPDATE tasks SET title = ?  description = ? due_date = ?  status = ?  WHERE id = ?")
+	stmt, err := tx.Prepare("UPDATE tasks SET title = ?, description = ?, due_date = ?, status = ? WHERE id = ? ")
 	if err != nil {
 		return false, err
 	}
 	defer stmt.Close()
 
-	_, err = stmt.Exec(ourtask.Title, ourtask.Description, ourtask.DueDate, ourtask.Status, ourtask.ID)
+	_, err = stmt.Exec(ourTask.Title, ourTask.Description, ourTask.DueDate, ourTask.Status, ourTask.ID)
 	if err != nil {
 		return false, err
 	}
